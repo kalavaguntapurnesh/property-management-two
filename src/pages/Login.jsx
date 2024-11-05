@@ -20,17 +20,23 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post("https://backend-six-kappa-64.vercel.app/auth/login", {
-        email,
-        password,
-      });
+      const res = await axios.post(
+        "https://backend-six-kappa-64.vercel.app/auth/login",
+        {
+          email,
+          password,
+        }
+      );
       const token = res.data.token;
       dispatch(setToken(token));
 
       // Fetch user details after login
-      const userRes = await axios.get("https://backend-six-kappa-64.vercel.app/auth/me", {
-        headers: { Authorization: token },
-      });
+      const userRes = await axios.get(
+        "https://backend-six-kappa-64.vercel.app/auth/me",
+        {
+          headers: { Authorization: token },
+        }
+      );
 
       dispatch(setUser(userRes.data));
       console.log("Login Successful");
