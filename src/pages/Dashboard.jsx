@@ -19,7 +19,7 @@ const Dashboard = () => {
   const openSidebar = () => setSidebarOpen(true);
   const closeSidebar = () => setSidebarOpen(false);
   const toggleMobileDropdown = (dropdown) => {
-    setOpenDropdownMobile((prev) => (prev === dropdown ? null : dropdown)); // Toggle the dropdown
+    setOpenDropdownMobile((prev) => (prev === dropdown ? null : dropdown));
   };
   return (
     <div>

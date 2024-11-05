@@ -30,12 +30,6 @@ const DashboardNavbar = () => {
               isSidebarOpen ? "translate-x-0" : "-translate-x-full"
             } transition-transform duration-300 lg:translate-x-0 z-20`}
           >
-            {/* <div className="flex justify-end p-4">
-          // Close button inside the sidebar for mobile
-          <button onClick={closeSidebar} className="text-xl lg:hidden">
-            <AiOutlineClose />
-          </button>
-        </div> */}
             <nav className="pt-4">
               <a href="/" className="text-center ">
                 <h1 className="w-full text-2xl text-mainColor font-bold pt-4 cursor-pointer">
@@ -44,7 +38,7 @@ const DashboardNavbar = () => {
               </a>
 
               <ul className="px-4 py-8">
-                <li className="p-4 md:border-b-0 border-b-[0.5px] border-gray-600 hover:bg-gray-200 hover:rounded-md transition-all duration-500">
+                <li className="p-4 md:border-b-0 border-b-[0.5px] border-gray-600 hover:bg-mainColor hover:text-white hover:rounded-md transition-all duration-500">
                   <div
                     onClick={() => toggleMobileDropdown("home")}
                     className="flex items-center justify-between cursor-pointer"
@@ -52,48 +46,9 @@ const DashboardNavbar = () => {
                     <span className="flex items-center">
                       <MdDashboard /> <h1 className="ml-2">Dashboard</h1>
                     </span>
-                    <FaAngleDown
-                      className={`transition-transform ${
-                        openDropdownMobile === "home"
-                          ? "rotate-180 text-mainColor"
-                          : ""
-                      }`}
-                    />
                   </div>
-                  <AnimatePresence>
-                    {openDropdownMobile === "home" && (
-                      <motion.ul
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="pl-4 mt-6 space-y-2"
-                      >
-                        <li className="text-gray-700 ">
-                          <a href="/learn-about-us" className="text-sm">
-                            About Us
-                          </a>
-                        </li>
-                        <li className="text-gray-700">
-                          <a
-                            href="/learn-about-us#logo_meaning"
-                            className="text-sm"
-                          >
-                            Logo Meaning
-                          </a>
-                        </li>
-                        <li className="text-gray-700">
-                          <a
-                            href="/learn-about-us#about_founder"
-                            className="text-sm"
-                          >
-                            Leadership
-                          </a>
-                        </li>
-                      </motion.ul>
-                    )}
-                  </AnimatePresence>
                 </li>
-                <li className="p-4 md:border-b-0 border-b-[0.5px] border-gray-600 hover:bg-gray-200 hover:rounded-md transition-all duration-500">
+                <li className="p-4 md:border-b-0 border-b-[0.5px] border-gray-600 hover:bg-mainColor hover:text-white hover:rounded-md transition-all duration-500">
                   <div
                     onClick={() => toggleMobileDropdown("rent-analysis")}
                     className="flex items-center justify-between cursor-pointer"
@@ -101,48 +56,9 @@ const DashboardNavbar = () => {
                     <span className="flex items-center">
                       <FaDollarSign /> <h1 className="ml-2">Rent Analysis</h1>
                     </span>
-                    <FaAngleDown
-                      className={`transition-transform ${
-                        openDropdownMobile === "rent-analysis"
-                          ? "rotate-180 text-mainColor"
-                          : ""
-                      }`}
-                    />
                   </div>
-                  <AnimatePresence>
-                    {openDropdownMobile === "rent-analysis" && (
-                      <motion.ul
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="pl-4 mt-6 space-y-2"
-                      >
-                        <li className="text-gray-700 ">
-                          <a href="/learn-about-us" className="text-sm">
-                            About Us
-                          </a>
-                        </li>
-                        <li className="text-gray-700">
-                          <a
-                            href="/learn-about-us#logo_meaning"
-                            className="text-sm"
-                          >
-                            Logo Meaning
-                          </a>
-                        </li>
-                        <li className="text-gray-700">
-                          <a
-                            href="/learn-about-us#about_founder"
-                            className="text-sm"
-                          >
-                            Leadership
-                          </a>
-                        </li>
-                      </motion.ul>
-                    )}
-                  </AnimatePresence>
                 </li>
-                <li className="p-4 md:border-b-0 border-b-[0.5px] border-gray-600 hover:bg-gray-200 hover:rounded-md transition-all duration-500">
+                <li className="p-4 md:border-b-0 border-b-[0.5px] border-gray-600 hover:bg-mainColor hover:text-white hover:rounded-md transition-all duration-500">
                   <div
                     onClick={() => toggleMobileDropdown("my-tenants")}
                     className="flex items-center justify-between cursor-pointer"
@@ -150,60 +66,32 @@ const DashboardNavbar = () => {
                     <span className="flex items-center">
                       <FaUsers /> <h1 className="ml-2">My Tenants</h1>
                     </span>
-                    <FaAngleDown
-                      className={`transition-transform ${
-                        openDropdownMobile === "my-tenants"
-                          ? "rotate-180 text-mainColor"
-                          : ""
-                      }`}
-                    />
                   </div>
-                  <AnimatePresence>
-                    {openDropdownMobile === "my-tenants" && (
-                      <motion.ul
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="pl-4 mt-6 space-y-2"
-                      >
-                        <li className="text-gray-700 ">
-                          <a href="/learn-about-us" className="text-sm">
-                            About Us
-                          </a>
-                        </li>
-                        <li className="text-gray-700">
-                          <a
-                            href="/learn-about-us#logo_meaning"
-                            className="text-sm"
-                          >
-                            Logo Meaning
-                          </a>
-                        </li>
-                        <li className="text-gray-700">
-                          <a
-                            href="/learn-about-us#about_founder"
-                            className="text-sm"
-                          >
-                            Leadership
-                          </a>
-                        </li>
-                      </motion.ul>
-                    )}
-                  </AnimatePresence>
                 </li>
 
-                <li className="p-4 md:border-b-0 border-b-[0.5px] border-gray-600 hover:bg-gray-200 hover:rounded-md transition-all duration-500">
+                <li className="p-4 md:border-b-0 border-b-[0.5px] border-gray-600 hover:bg-mainColor hover:text-white hover:rounded-md transition-all duration-500">
+                  <div
+                    onClick={() => toggleMobileDropdown("reports")}
+                    className="flex items-center justify-between cursor-pointer"
+                  >
+                    <span className="flex items-center">
+                      <HiDocumentReport />{" "}
+                      <h1 className="ml-2">Land Reports</h1>
+                    </span>
+                  </div>
+                </li>
+                <li className="p-4 md:border-b-0 border-b-[0.5px] border-gray-600 hover:bg-mainColor hover:text-white hover:rounded-md transition-all duration-500 cursor-pointer">
                   <div
                     onClick={() => toggleMobileDropdown("profile")}
                     className="flex items-center justify-between cursor-pointer"
                   >
-                    <span className="flex items-center">
-                      <FaUserAlt /> <h1 className="ml-2">Profile</h1>
+                    <span className="flex items-center hover:text-white">
+                      <FaUserAlt /> <h1 className="ml-2">My Profile</h1>
                     </span>
                     <FaAngleDown
                       className={`transition-transform ${
                         openDropdownMobile === "profile"
-                          ? "rotate-180 text-mainColor"
+                          ? "rotate-180 text-mainColor hover:text-white duration-500"
                           : ""
                       }`}
                     />
@@ -216,83 +104,26 @@ const DashboardNavbar = () => {
                         exit={{ opacity: 0, height: 0 }}
                         className="pl-4 mt-6 space-y-2"
                       >
-                        <li className="text-gray-700 ">
-                          <a href="/learn-about-us" className="text-sm">
-                            About Us
+                        <li>
+                          <a href="/profile" className="text-sm">
+                            My Profile
                           </a>
                         </li>
-                        <li className="text-gray-700">
+                        <li>
                           <a
                             href="/learn-about-us#logo_meaning"
                             className="text-sm"
                           >
-                            Logo Meaning
-                          </a>
-                        </li>
-                        <li className="text-gray-700">
-                          <a
-                            href="/learn-about-us#about_founder"
-                            className="text-sm"
-                          >
-                            Leadership
+                            Logout
                           </a>
                         </li>
                       </motion.ul>
                     )}
                   </AnimatePresence>
                 </li>
-                <li className="p-4 md:border-b-0 border-b-[0.5px] border-gray-600 hover:bg-gray-200 hover:rounded-md transition-all duration-500">
-                  <div
-                    onClick={() => toggleMobileDropdown("reports")}
-                    className="flex items-center justify-between cursor-pointer"
-                  >
-                    <span className="flex items-center">
-                      <HiDocumentReport /> <h1 className="ml-2">Reports</h1>
-                    </span>
-                    {/* <FaAngleDown
-                    className={`transition-transform ${
-                      openDropdownMobile === "reports"
-                        ? "rotate-180 text-mainColor"
-                        : ""
-                    }`}
-                  /> */}
-                  </div>
-                  {/* <AnimatePresence>
-                  {openDropdownMobile === "reports" && (
-                    <motion.ul
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      exit={{ opacity: 0, height: 0 }}
-                      className="pl-4 mt-6 space-y-2"
-                    >
-                      <li className="text-gray-700 ">
-                        <a href="/learn-about-us" className="text-sm">
-                          About Us
-                        </a>
-                      </li>
-                      <li className="text-gray-700">
-                        <a
-                          href="/learn-about-us#logo_meaning"
-                          className="text-sm"
-                        >
-                          Logo Meaning
-                        </a>
-                      </li>
-                      <li className="text-gray-700">
-                        <a
-                          href="/learn-about-us#about_founder"
-                          className="text-sm"
-                        >
-                          Leadership
-                        </a>
-                      </li>
-                    </motion.ul>
-                  )}
-                </AnimatePresence> */}
-                </li>
               </ul>
               <div className="px-4 ">
-                <h1 className="p-4 uppercase md:border-b-0 border-gray-600 hover:bg-gray-200 hover:rounded-md transition-all duration-500">
+                <h1 className="p-4 uppercase md:border-b-0 border-gray-600 hover:bg-gray-200 hover:rounded-md font-medium transition-all duration-500">
                   my properties
                 </h1>
               </div>
