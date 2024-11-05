@@ -20,7 +20,7 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post("http://localhost:5000/auth/login", {
+      const res = await axios.post("https://backend-six-kappa-64.vercel.app/auth/login", {
         email,
         password,
       });
@@ -28,7 +28,7 @@ const Login = () => {
       dispatch(setToken(token));
 
       // Fetch user details after login
-      const userRes = await axios.get("http://localhost:5000/auth/me", {
+      const userRes = await axios.get("https://backend-six-kappa-64.vercel.app/auth/me", {
         headers: { Authorization: token },
       });
 
