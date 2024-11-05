@@ -3,35 +3,90 @@ import NavBar from "./../components/Navbar";
 import Footer from "../components/Footer";
 import { useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
+import Spinner from "../components/Spinner";
+import { useDispatch } from "react-redux";
+import axios from "axios";
+import { setToken, setUser } from "../store/authSlice";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const [error, setError] = useState(null); // To display any error messages
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false); // Loading state
+
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [verified, setVerified] = useState(false);
   const [role, setRole] = useState("");
 
+
   const handleRoleChange = (event) => {
     setRole(event.target.value);
   };
 
-  const handleCaptcha = (value) => {
-    console.log("Captcha value:", value);
-    setVerified(true); // This will be true once reCAPTCHA is successfully completed
-  };
+  // const handleCaptcha = (value) => {
+  //   console.log("Captcha value:", value);
+  //   setVerified(true); // This will be true once reCAPTCHA is successfully completed
+  // };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (verified) {
-      // Proceed with form submission
-      console.log("Form submitted!");
-    } else {
-      alert("Please complete the CAPTCHA!");
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   if (verified) {
+  //     // Proceed with form submission
+  //     console.log("Form submitted!");
+  //   } else {
+  //     alert("Please complete the CAPTCHA!");
+  //   }
+  // };
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      // Reset error state
+      setError(null);
+
+      // Make API request to register the user
+      const res = await axios.post(
+        "https://backend-six-kappa-64.vercel.app/auth/register",
+        // "http://localhost:5000/auth/register",
+        {
+          email,
+          password,
+          fullName,
+          role,
+        }
+      );
+
+      // Store the token in Redux
+      dispatch(setToken(res.data.token));
+
+      // Fetch user details with the token
+      const userRes = await axios.get(
+        "https://backend-six-kappa-64.vercel.app/auth/me",
+        // "http://localhost:5000/auth/me",
+        {
+          headers: { Authorization: res.data.token },
+        }
+      );
+      dispatch(setUser(userRes.data));
+
+      // Redirect to the dashboard after successful registration
+      navigate("/dashboard");
+    } catch (err) {
+      console.error("Registration failed:", err);
+      setError("Registration failed. Please try again."); // Display error message
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
+
   return (
-    <div>
+    <div className="relative">
       <NavBar />
+      {loading && <Spinner />}
       <div>
         <section className="text-black md:py-0 py-8">
           <div className="max-w-[1400px] mx-auto">
@@ -43,7 +98,10 @@ const Register = () => {
                       <h1 className="text-3xl text-center font-semibold text-colorThree">
                         Get started with us
                       </h1>
-                      <form className="space-y-4 md:space-y-6">
+                      <form
+                        className="space-y-4 md:space-y-6"
+                        onSubmit={handleRegister}
+                      >
                         {/* Role Selection */}
                         <div className="flex flex-col space-y-2">
                           <label className="text-sm font-bold text-colorThree">
@@ -141,12 +199,12 @@ const Register = () => {
                         </div>
 
                         {/* reCAPTCHA */}
-                        <div className="w-[100%] flex justify-center items-center">
+                        {/* <div className="w-[100%] flex justify-center items-center">
                           <ReCAPTCHA
                             sitekey="6LchMmUqAAAAANKg1dNzYDXJnCMf-L6TjRsUVAfG"
                             onChange={handleCaptcha}
                           />
-                        </div>
+                        </div> */}
 
                         {/* Sign Up Button */}
                         <button
