@@ -9,7 +9,7 @@ const Profile = () => {
     <div>
       <Navbar />
       <div className="max-w-md mx-auto p-4">
-        <h2 className="text-2xl font-bold mb-4">My Profile</h2>
+        <h2 className="text-2xl font-bold mb-4 pt-24">My Profile</h2>
         {user ? (
           <div>
             <p>

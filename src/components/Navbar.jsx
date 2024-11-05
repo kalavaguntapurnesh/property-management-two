@@ -32,8 +32,13 @@ import { VscLaw } from "react-icons/vsc";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../store/authSlice";
+import { MdDashboard } from "react-icons/md";
+import { FaBell, FaUsers } from "react-icons/fa";
+import { HiDocumentReport } from "react-icons/hi";
+import DashboardNavbar from "./DashboardNavbar";
 
 const NavBar = () => {
+  const user = useSelector((state) => state.auth.user);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
 
@@ -73,73 +78,21 @@ const NavBar = () => {
     setOpenDropdownMobile((prev) => (prev === dropdown ? null : dropdown)); // Toggle the dropdown
   };
 
+  const [isSidebarOpen, setSidebarOpen] = useState(false); // Sidebar closed by default
+
+  const openSidebar = () => setSidebarOpen(true);
+  const closeSidebar = () => setSidebarOpen(false);
+
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-10 transition-all duration-300 ease-in-out ${
-        isScrolled ? "bg-white shadow-md py-4" : "bg-transparent py-6"
+        isScrolled ? "bg-white shadow-md py-4" : "bg-transparent"
       }`}
     >
       {isAuthenticated ? (
-        <div className="border-2 border-green-500">
-          <nav className="p-4 bg-gray-800 text-white">
-            <div className="flex justify-between items-center">
-              <div className="text-xl font-bold">MyApp</div>
-              <div className="space-x-4">
-                <>
-                  <Link to="/dashboard" className="hover:underline">
-                    Home
-                  </Link>
-                  <Link to="/profile" className="hover:underline">
-                    My Profile
-                  </Link>
-                  <button onClick={handleLogout} className="hover:underline">
-                    Logout
-                  </button>
-                </>
-              </div>
-            </div>
-          </nav>
-          <div className="hidden lg:block fixed top-0 left-0 w-64 h-full bg-gray-800 text-white pt-16">
-            <nav className="space-y-4">
-              <ul>
-                <li>
-                  <Link
-                    to="/profile"
-                    className="block px-4 py-2 hover:bg-gray-700"
-                  >
-                    My Profile
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/dashboard"
-                    className="block px-4 py-2 hover:bg-gray-700"
-                  >
-                    Dashboard
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/reports"
-                    className="block px-4 py-2 hover:bg-gray-700"
-                  >
-                    Reports
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/rentals"
-                    className="block px-4 py-2 hover:bg-gray-700"
-                  >
-                    Rentals
-                  </Link>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
+        <DashboardNavbar />
       ) : (
-        <div className="max-w-[1400px] mx-auto flex justify-between items-center px-4 border-2 border-red-500">
+        <div className="max-w-[1400px] mx-auto flex justify-between items-center px-4 ">
           <a href="/" className="flex items-center">
             <div
               className={`h-10 w-10 bg-mainColor rounded-full flex items-center justify-center text-white font-bold transition-all duration-300 ease-in-out ${
