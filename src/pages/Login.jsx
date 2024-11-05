@@ -3,31 +3,64 @@ import NavBar from "./../components/Navbar";
 import Footer from "../components/Footer";
 import { useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
+import { useDispatch } from "react-redux";
+import axios from "axios";
+import { setToken, setUser } from "../store/authSlice";
+import { useNavigate } from "react-router-dom";
+import Spinner from "../components/Spinner";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [verified, setVerified] = useState(false);
-  
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false); // Loading state
 
-  const handleCaptcha = (value) => {
-    console.log("Captcha value:", value);
-    setVerified(true); // This will be true once reCAPTCHA is successfully completed
-  };
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const res = await axios.post("http://localhost:5000/auth/login", {
+        email,
+        password,
+      });
+      const token = res.data.token;
+      dispatch(setToken(token));
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (verified) {
-      // Proceed with form submission
-      console.log("Form submitted!");
-    } else {
-      alert("Please complete the CAPTCHA!");
+      // Fetch user details after login
+      const userRes = await axios.get("http://localhost:5000/auth/me", {
+        headers: { Authorization: token },
+      });
+
+      dispatch(setUser(userRes.data));
+      console.log("Login Successful");
+      navigate("/dashboard");
+    } catch (err) {
+      console.error("Login failed:", err);
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
+
+  // const handleCaptcha = (value) => {
+  //   console.log("Captcha value:", value);
+  //   setVerified(true); // This will be true once reCAPTCHA is successfully completed
+  // };
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   if (verified) {
+  //     // Proceed with form submission
+  //     console.log("Form submitted!");
+  //   } else {
+  //     alert("Please complete the CAPTCHA!");
+  //   }
+  // };
   return (
     <div>
       <NavBar />
-      <div>
+      <div className="relative">
+        {loading && <Spinner />}
         <section className=" text-black md:py-0 py-8">
           <div className="max-w-[1400px] mx-auto">
             <div className="mt-28">
@@ -40,7 +73,7 @@ const Login = () => {
                       </h1>
                       <form
                         className="space-y-4 md:space-y-6"
-                        // onSubmit={handleSubmit}
+                        onSubmit={handleLogin}
                       >
                         <div>
                           <label
@@ -89,12 +122,12 @@ const Login = () => {
                             </span> */}
                           </div>
                         </div>
-                        <div className="w-[100%] flex justify-center items-center">
+                        {/* <div className="w-[100%] flex justify-center items-center">
                           <ReCAPTCHA
                             sitekey="6LchMmUqAAAAANKg1dNzYDXJnCMf-L6TjRsUVAfG"
                             onChange={handleCaptcha}
                           />
-                        </div>
+                        </div> */}
                         <div className="flex items-center justify-between">
                           <div className="flex items-start">
                             <div className="flex items-center h-5">
@@ -123,6 +156,7 @@ const Login = () => {
                           </a>
                         </div>
                         <button
+                          disabled={loading}
                           type="submit"
                           className="w-full text-white bg-mainColor text-base hover:bg-colorFour transition ease-in-out duration-1000 focus:outline-none font-medium rounded px-5 py-2.5 text-center cursor-pointer"
                         >

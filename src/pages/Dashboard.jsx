@@ -371,7 +371,10 @@ const Dashboard = () => {
                 </div>
               </div>
 
-              <a href="/" className="flex items-center space-x-4 cursor-pointer">
+              <a
+                href="/"
+                className="flex items-center space-x-4 cursor-pointer"
+              >
                 <div className="lg:flex hidden flex-col justify-center items-center">
                   <h1 className="font-semibold">Purnesh</h1>
                   <p className="text-gray-500 text-sm">Landlord</p>
