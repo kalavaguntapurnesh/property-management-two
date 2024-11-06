@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
 import Accordion from "../components/Accordion";
-import Testimonial from "./../components/Testimonial";
+import ScrollToTop from "./../components/ScrollToTop";
 
 const Pricing = () => {
   const location = useLocation();
@@ -67,6 +67,7 @@ const Pricing = () => {
   return (
     <div>
       <Navbar />
+      <ScrollToTop />
       <div className="mt-28">
         <div className="relative">
           <div className="w-full">

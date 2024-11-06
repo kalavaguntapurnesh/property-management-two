@@ -1,6 +1,7 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
+import ScrollToTop from "./../components/ScrollToTop";
 
 const Privacy = () => {
   const navigate = useNavigate();
@@ -8,6 +9,7 @@ const Privacy = () => {
   return (
     <div>
       <Navbar />
+      <ScrollToTop />
 
       <div className="mt-28">
         <div className="relative">

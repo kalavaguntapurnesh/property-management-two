@@ -55,7 +55,7 @@ const Hero = () => {
                 // className="w-full lg:h-[550px] h-[450px] lg:object-cover object-center"
                 className="w-full h-[500px] lg:object-cover object-center"
               />
-              <div className="absolute inset-0 bg-gray-700 opacity-40 rounded-md"></div>
+              <div className="absolute inset-0 bg-gray-700 opacity-50 rounded-md"></div>
               <div className="absolute inset-0 flex flex-col items-center justify-center">
                 <h2 className="text-white text-center lg:text-6xl text-4xl font-bold">
                   {img.heading}
@@ -65,7 +65,7 @@ const Hero = () => {
                   {img.paragraph}
                 </p>
 
-                <div className="md:w-full w-[90%] md:hidden block">
+                {/* <div className="md:w-full w-[90%] md:hidden block">
                   <form class="md:max-w-xl max-w-sm mx-auto mt-8">
                     <label
                       for="default-search"
@@ -106,7 +106,7 @@ const Hero = () => {
                       </button>
                     </div>
                   </form>
-                </div>
+                </div> */}
               </div>
             </div>
           </SwiperSlide>
