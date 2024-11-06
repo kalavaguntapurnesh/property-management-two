@@ -11,6 +11,9 @@ import {
 import { IoMdSettings } from "react-icons/io";
 import { AnimatePresence, motion } from "framer-motion";
 import { HiDocumentReport } from "react-icons/hi";
+import { logout } from "../store/authSlice";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 const DashboardNavbar = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false); // Sidebar closed by default
@@ -21,6 +24,13 @@ const DashboardNavbar = () => {
   const toggleMobileDropdown = (dropdown) => {
     setOpenDropdownMobile((prev) => (prev === dropdown ? null : dropdown)); // Toggle the dropdown
   };
+
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
   return (
     <div className="-mt-6">
       <div>
@@ -182,8 +192,8 @@ const DashboardNavbar = () => {
             }`}
           >
             {/* Header */}
-            <header className="flex items-center justify-between bg-white p-5 shadow">
-              <div className="flex items-center space-x-4 lg:space-x-0 w-full">
+            <header className="flex items-center justify-between bg-white p-5 shadow ">
+              <div className="flex items-center space-x-4 lg:space-x-0 w-full ">
                 <button onClick={openSidebar} className="lg:hidden text-2xl">
                   <RiMenu3Fill />
                 </button>
@@ -192,37 +202,45 @@ const DashboardNavbar = () => {
                   <input
                     type="text"
                     placeholder="Search..."
-                    className="w-full max-w-2xl px-4 py-2 rounded-full focus:outline-none focus:border-gray-400 mx-auto lg:mx-0 lg:block border-[1px] border-gray-500"
+                    className="w-full max-w-2xl px-4 py-2 rounded-full focus:outline-none focus:border-gray-400 mx-auto lg:mx-0 border-[1px] border-gray-500 lg:block hidden"
                   />
                 </div>
-              </div>
-              <div className="flex items-center space-x-4 lg:pr-10 pr-2">
-                {/* Notification Icon */}
-                <div className="lg:flex hidden space-x-2 justify-center items-center cursor-pointer">
-                  <div className="flex justify-center items-center w-10 h-10 border-2 border-gray-100 bg-gray-100 rounded-full">
-                    <FaBell size={20} className="text-gray-700" />
+
+                <div className="flex items-center justify-end w-full space-x-4 lg:pr-10 pr-2 ">
+                  {/* Notification Icon */}
+                  <div className="lg:flex hidden space-x-2 justify-center items-center cursor-pointer">
+                    <div className="flex justify-center items-center w-10 h-10 border-2 border-gray-100 bg-gray-100 rounded-full">
+                      <FaBell size={20} className="text-gray-700" />
+                    </div>
+                    <div className="flex justify-center items-center w-10 h-10 border-2 border-gray-100 bg-gray-100 rounded-full">
+                      <IoMdSettings size={20} className="text-gray-700" />
+                    </div>
                   </div>
-                  <div className="flex justify-center items-center w-10 h-10 border-2 border-gray-100 bg-gray-100 rounded-full">
-                    <IoMdSettings size={20} className="text-gray-700" />
-                  </div>
+
+                  <a
+                    href="/"
+                    className="flex items-center space-x-4 cursor-pointer"
+                  >
+                    {/* <div className="lg:flex hidden flex-col justify-center items-center">
+                      <h1 className="font-semibold">Purnesh</h1>
+                      <p className="text-gray-500 text-sm">Landlord</p>
+                    </div> */}
+                    <img
+                      src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
+                      alt="Profile"
+                      className="w-10 h-10 rounded-full"
+                    />
+                  </a>
+
+                  <button
+                    onClick={handleLogout}
+                    className="font-medium lg:block hidden text-white px-6 py-2 bg-mainColor rounded-full"
+                  >
+                    Logout
+                  </button>
+
+                  {/* Profile Picture */}
                 </div>
-
-                <a
-                  href="/"
-                  className="flex items-center space-x-4 cursor-pointer"
-                >
-                  <div className="lg:flex hidden flex-col justify-center items-center">
-                    <h1 className="font-semibold">Purnesh</h1>
-                    <p className="text-gray-500 text-sm">Landlord</p>
-                  </div>
-                  <img
-                    src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
-                    alt="Profile"
-                    className="w-10 h-10 rounded-full"
-                  />
-                </a>
-
-                {/* Profile Picture */}
               </div>
             </header>
 
