@@ -1,4 +1,4 @@
-import { RiMenu3Fill } from "react-icons/ri";
+import { CgMenuLeftAlt } from "react-icons/cg";
 import { MdDashboard } from "react-icons/md";
 import { useState } from "react";
 import {
@@ -41,7 +41,7 @@ const DashboardNavbar = () => {
               isSidebarOpen ? "translate-x-0" : "-translate-x-full"
             } transition-transform duration-300 lg:translate-x-0 z-20`}
           >
-            <nav className="pt-4">
+            <nav className="pt-4 relative h-full">
               <a href="/" className="text-center ">
                 <h1 className="w-full text-2xl text-mainColor font-bold pt-4 cursor-pointer">
                   AL <span className="text-black">Rentals.</span>
@@ -174,6 +174,15 @@ const DashboardNavbar = () => {
                   </div>
                 </li>
               </ul>
+
+              <div className="absolute lg:bottom-4 bottom-8 left-0 w-full px-4 py-4">
+                <button
+                  onClick={handleLogout}
+                  className="w-full text-white bg-mainColor py-2 rounded-md font-medium"
+                >
+                  Logout
+                </button>
+              </div>
             </nav>
           </div>
 
@@ -194,8 +203,8 @@ const DashboardNavbar = () => {
             {/* Header */}
             <header className="flex items-center justify-between bg-white p-5 shadow ">
               <div className="flex items-center space-x-4 lg:space-x-0 w-full ">
-                <button onClick={openSidebar} className="lg:hidden text-2xl">
-                  <RiMenu3Fill />
+                <button onClick={openSidebar} className="lg:hidden">
+                  <CgMenuLeftAlt size={28} />
                 </button>
                 {/* Centered Search Bar on Mobile */}
                 <div className="lg:pl-8 pl-8 w-full lg:w-1/2">
