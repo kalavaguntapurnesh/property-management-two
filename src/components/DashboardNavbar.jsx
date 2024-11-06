@@ -8,6 +8,7 @@ import {
   FaUserAlt,
   FaUsers,
 } from "react-icons/fa";
+import { IoMdSettings } from "react-icons/io";
 import { AnimatePresence, motion } from "framer-motion";
 import { HiDocumentReport } from "react-icons/hi";
 
@@ -197,9 +198,12 @@ const DashboardNavbar = () => {
               </div>
               <div className="flex items-center space-x-4 lg:pr-10 pr-2">
                 {/* Notification Icon */}
-                <div className="lg:flex hidden justify-center items-center cursor-pointer">
+                <div className="lg:flex hidden space-x-2 justify-center items-center cursor-pointer">
                   <div className="flex justify-center items-center w-10 h-10 border-2 border-gray-100 bg-gray-100 rounded-full">
                     <FaBell size={20} className="text-gray-700" />
+                  </div>
+                  <div className="flex justify-center items-center w-10 h-10 border-2 border-gray-100 bg-gray-100 rounded-full">
+                    <IoMdSettings size={20} className="text-gray-700" />
                   </div>
                 </div>
 
