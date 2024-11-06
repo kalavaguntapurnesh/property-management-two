@@ -21,7 +21,7 @@ const DashboardNavbar = () => {
     setOpenDropdownMobile((prev) => (prev === dropdown ? null : dropdown)); // Toggle the dropdown
   };
   return (
-    <div>
+    <div className="-mt-6">
       <div>
         <div className="flex h-screen bg-gray-100 overflow-hidden">
           {/* Sidebar */}

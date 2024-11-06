@@ -8,6 +8,7 @@ import axios from "axios";
 import { setToken, setUser } from "../store/authSlice";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../components/Spinner";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const [email, setEmail] = useState("");
