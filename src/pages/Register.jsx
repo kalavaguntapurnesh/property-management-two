@@ -26,22 +26,15 @@ const Register = () => {
   };
 
   const handleCaptcha = (value) => {
-    console.log("Captcha value:", value);
-    setVerified(true); // This will be true once reCAPTCHA is successfully completed
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (verified) {
-      // Proceed with form submission
-      console.log("Form submitted!");
-    } else {
-      alert("Please complete the CAPTCHA!");
-    }
+    setVerified(true);
   };
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    if (!verified) {
+      alert("Please complete the reCAPTCHA to register.");
+      return;
+    }
     setLoading(true);
     try {
       // Reset error state
@@ -208,9 +201,9 @@ const Register = () => {
                         {/* Sign Up Button */}
                         <button
                           type="submit"
-                          disabled={!role}
+                          disabled={!verified || !role} // Disable if captcha or role is not completed
                           className={`w-full text-base font-medium rounded px-5 py-2.5 text-center transition ease-in-out duration-1000 ${
-                            role
+                            verified && role
                               ? "bg-mainColor hover:bg-colorFour text-white"
                               : "bg-[#f8f9fa] cursor-not-allowed text-gray-400"
                           }`}
