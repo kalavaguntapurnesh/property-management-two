@@ -15,9 +15,14 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false); // Loading state
+  const [verified, setVerified] = useState(false); // Captcha verification state
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    if (!verified) {
+      alert("Please complete the reCAPTCHA to log in.");
+      return;
+    }
     setLoading(true);
     try {
       const res = await axios.post(
@@ -48,20 +53,10 @@ const Login = () => {
     }
   };
 
-  // const handleCaptcha = (value) => {
-  //   console.log("Captcha value:", value);
-  //   setVerified(true); // This will be true once reCAPTCHA is successfully completed
-  // };
+  const handleCaptcha = (value) => {
+    setVerified(true);
+  };
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   if (verified) {
-  //     // Proceed with form submission
-  //     console.log("Form submitted!");
-  //   } else {
-  //     alert("Please complete the CAPTCHA!");
-  //   }
-  // };
   return (
     <div>
       <NavBar />
@@ -128,12 +123,12 @@ const Login = () => {
                             </span> */}
                           </div>
                         </div>
-                        {/* <div className="w-[100%] flex justify-center items-center">
+                        <div className="w-[100%] flex justify-center items-center">
                           <ReCAPTCHA
                             sitekey="6LchMmUqAAAAANKg1dNzYDXJnCMf-L6TjRsUVAfG"
                             onChange={handleCaptcha}
                           />
-                        </div> */}
+                        </div>
                         <div className="flex items-center justify-between">
                           <div className="flex items-start">
                             <div className="flex items-center h-5">
@@ -162,9 +157,12 @@ const Login = () => {
                           </a>
                         </div>
                         <button
-                          disabled={loading}
+                          disabled={!verified || loading} // Disable until reCAPTCHA is completed
                           type="submit"
-                          className="w-full text-white bg-mainColor text-base hover:bg-colorFour transition ease-in-out duration-1000 focus:outline-none font-medium rounded px-5 py-2.5 text-center cursor-pointer"
+                          className={`w-full text-white bg-mainColor text-base hover:bg-colorFour transition ease-in-out duration-1000 focus:outline-none font-medium rounded px-5 py-2.5 text-center cursor-pointer ${
+                            (!verified || loading) &&
+                            "opacity-50 cursor-not-allowed"
+                          }`}
                         >
                           Sign in
                         </button>

@@ -21,25 +21,24 @@ const Register = () => {
   const [verified, setVerified] = useState(false);
   const [role, setRole] = useState("");
 
-
   const handleRoleChange = (event) => {
     setRole(event.target.value);
   };
 
-  // const handleCaptcha = (value) => {
-  //   console.log("Captcha value:", value);
-  //   setVerified(true); // This will be true once reCAPTCHA is successfully completed
-  // };
+  const handleCaptcha = (value) => {
+    console.log("Captcha value:", value);
+    setVerified(true); // This will be true once reCAPTCHA is successfully completed
+  };
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   if (verified) {
-  //     // Proceed with form submission
-  //     console.log("Form submitted!");
-  //   } else {
-  //     alert("Please complete the CAPTCHA!");
-  //   }
-  // };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (verified) {
+      // Proceed with form submission
+      console.log("Form submitted!");
+    } else {
+      alert("Please complete the CAPTCHA!");
+    }
+  };
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -199,12 +198,12 @@ const Register = () => {
                         </div>
 
                         {/* reCAPTCHA */}
-                        {/* <div className="w-[100%] flex justify-center items-center">
+                        <div className="w-[100%] flex justify-center items-center">
                           <ReCAPTCHA
                             sitekey="6LchMmUqAAAAANKg1dNzYDXJnCMf-L6TjRsUVAfG"
                             onChange={handleCaptcha}
                           />
-                        </div> */}
+                        </div>
 
                         {/* Sign Up Button */}
                         <button
